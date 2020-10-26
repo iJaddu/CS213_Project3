@@ -15,7 +15,6 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-        Button button = new Button("Click me.");
     }
 
 
