@@ -211,6 +211,9 @@ public class AccountDatabase {
         return -1;
     }
 
+    /**
+    Sort the Account Database by the openDate of the account
+     */
     private void sortByDateOpen() {     // sort in ascending order
 
         Account temp;
@@ -227,6 +230,9 @@ public class AccountDatabase {
 
     }
 
+    /**
+    Sort the Account Database by the last name of the Account holder
+     */
     private void sortByLastName() {     // sort in ascending order
 
         Account temp;
@@ -243,58 +249,82 @@ public class AccountDatabase {
 
     }
 
-    public void printByDateOpen() {
+    /**
+    Returns a string of the accounts in Account database sorted by the date opened
+    @return msg
+    */
+    public String printByDateOpen() {
+
+        String msg = "";
+
         if(size == 0){
-            System.out.println("Database is empty.");
-            return;
+            msg = "Database is Empty";
+            return msg;
         }
+
         sortByDateOpen();
-        System.out.println("--Printing Statement by Date Opened--");
+        msg = "--Printing Statement by Date Opened-- \n";
+
         for(int i = 0; i < size; i++) {
-            System.out.println(accounts[i].toString());
-            System.out.println("- Interest: $" + accounts[i].monthlyInterest());
-            System.out.println("- Fee: $" + accounts[i].monthlyFee());
-            System.out.println("- New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) );
+            msg = msg + accounts[i].toString() + "\n";
+            msg = msg + "- Interest: $" + accounts[i].monthlyInterest() + "\n";
+            msg = msg + "- Fee: $" + accounts[i].monthlyFee() + "\n";
+            msg = msg + "- New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
         }
-        System.out.println("--End of printing--");
-
-
+        msg = msg + "--End of printing--\n";
+        return msg;
     }
 
-    public void printByLastName() {
+    /**
+    Returns a string of the accounts in Account database sorted by the last name of the account holder
+    @return msg
+    */
+    public String printByLastName() {
+
+        String msg = "";
+
         if(size == 0){
-            System.out.println("Database is empty.");
-            return;
+            msg = "Database is empty.\n";
+            return msg;
         }
+
         sortByLastName();
+        msg = msg + "--Printing Statement by Last Name--\n";
 
-        System.out.println("--Printing Statement by Last Name--");
         for(int i = 0; i < size; i++) {
-            System.out.println(accounts[i].toString());
-            System.out.println("- Interest: $" + accounts[i].monthlyInterest());
-            System.out.println("- Fee: $" + accounts[i].monthlyFee());
-            System.out.println("- New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) );
+            msg = msg + accounts[i].toString() + "\n";
+            msg =msg + "- Interest: $" + accounts[i].monthlyInterest() + "\n";
+            msg = msg + "- Fee: $" + accounts[i].monthlyFee() + "\n";
+            msg = msg + "- New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
         }
-        System.out.println("--End of printing--");
+        msg = msg + "--End of printing--\n";
+        return msg;
     }
 
-    public void printAccounts() {
+    /**
+    Returns a string of the accounts in Account database
+    @return msg
+    */
+    public String printAccounts() {
+
+        String msg = "";
+
         if(size == 0){
-            System.out.println("Database is empty.");
-            return;
+            msg = "Database is empty.\n";
+            return msg;
         }
-        System.out.println("--Listing Accounts in the Database--");
+        msg = msg + "--Listing Accounts in the Database--\n";
         for(int i = 0; i < size; i++) {
             if(accountType(accounts[i]) == "C"){
-                System.out.println(((Checking)accounts[i]).toString());
+                msg = msg + ((Checking)accounts[i]).toString();
             } else if (accountType(accounts[i]) == "S"){
-                System.out.println(((Savings)accounts[i]).toString());
+                msg = msg + ((Savings)accounts[i]).toString();
             }else{
-                System.out.println(((MoneyMarket)accounts[i]).toString());
+                msg = msg + ((MoneyMarket)accounts[i]).toString();
             }
         }
-        System.out.println("--end of listing--");
-
+        msg = msg + "--end of listing--\n";
+        return msg;
     }
 
 }
