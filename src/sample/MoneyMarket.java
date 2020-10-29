@@ -16,6 +16,11 @@ public class MoneyMarket extends Account {
         this.withdrawals = 0;
     }
 
+    public MoneyMarket(Profile holder, double balance, Date dateOpen) {
+
+        super(holder, balance, dateOpen);
+        this.withdrawals = 0;
+    }
 
 
     public double monthlyInterest(){

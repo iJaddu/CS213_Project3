@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import java.util.StringTokenizer;
 
 public class Controller {
+    AccountDatabase accDB = new AccountDatabase();
 
     @FXML
     private TextField firstNameOpen, lastNameOpen, balanceOpen, firstNameClose, lastNameClose, balanceClose, firstNameDeposit, firstNameWithdraw, lastNameDeposit, lastNameWithdraw, amountDeposit, amountWithdraw, monthOpen, dayOpen, yearOpen, monthClose, dayClose, yearClose;
@@ -94,17 +95,26 @@ public class Controller {
     void closeAccount(ActionEvent event) {
 
         try{
+            Profile prof = new Profile();
+            prof.setFname(firstNameClose.getText());
+            prof.setLname(lastNameClose.getText());
+            Date tempDate = new Date(1, 1, 1);
+
             if(MMRadioButton.isSelected()){
+                MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate, 0);
+                boolean x = accDB.remove(temp);
 
             }else if(SavingsRadioButton.isSelected()){
+                Savings temp = new Savings(prof, 0.0, tempDate);
+                boolean x = accDB.remove(temp);
 
             }else if(CheckingRadioButton.isSelected()){
-
+                Checking temp = new Checking(prof, 0.0, tempDate);
+                boolean x = accDB.remove(temp);
+            }else{
+                //print error
             }
 
-            Profile profile = new Profile();
-            profile.setFname(firstNameClose.getText());
-            profile.setLname(lastNameClose.getText());
 
         }catch (Exception e){
 
@@ -116,29 +126,37 @@ public class Controller {
     @FXML
     void openAccount(ActionEvent event) {
         try{
-            if(MMRadioButton.isSelected()){
 
-            }else if(SavingsRadioButton.isSelected()){
-
-            }else if(CheckingRadioButton.isSelected()){
-
-            }
-
-            Profile profile = new Profile();
-            profile.setFname(firstNameClose.getText());
-            profile.setLname(lastNameClose.getText());
+            Profile prof = new Profile();
+            prof.setFname(firstNameClose.getText());
+            prof.setLname(lastNameClose.getText());
 
             int year = Integer.parseInt(yearOpen.getText());
             int month = Integer.parseInt(monthOpen.getText());
             int day = Integer.parseInt(dayOpen.getText());
-            Date date = new Date(year, month, day);
+            Date tempDate = new Date(year, month, day);
+
+            boolean a = tempDate.isValid();
+            // PRINT ERROR IF NOT
+
+            double amount = Double.parseDouble(balanceOpen.getText());
 
 
+            if(MMRadioButton.isSelected()){
+                int withdraw = 0;
+                MoneyMarket temp = new MoneyMarket(prof, amount, tempDate, withdraw);
+                boolean x = accDB.add(temp);
 
+            }else if(SavingsRadioButton.isSelected()){
+                boolean loyalty = loyalCustomerOpen.isSelected();
+                Savings temp = new Savings(prof, amount, tempDate, loyalty);
+                boolean x = accDB.add(temp);
 
-            double depositAmount = Double.parseDouble(amountDeposit.getText()); // Temp
-
-
+            }else if(CheckingRadioButton.isSelected()){
+                boolean dDeposit = directDepositOpen.isSelected();
+                Checking temp = new Checking(prof, amount, tempDate, dDeposit);
+                boolean x = accDB.add(temp);
+            }
 
         }catch (Exception e){
 
@@ -149,9 +167,27 @@ public class Controller {
     @FXML
     void deposit(ActionEvent event) {
         try{
-            Profile profile = new Profile();
-            profile.setFname(firstNameDeposit.getText());
-            profile.setLname(lastNameDeposit.getText());
+            Profile prof = new Profile();
+            prof.setFname(firstNameDeposit.getText());
+            prof.setLname(lastNameDeposit.getText());
+            Date tempDate = new Date(1, 1, 1);
+
+
+            double depositAmount = Double.parseDouble(amountDeposit.getText()); // Temp
+
+            if(MMRadioButton.isSelected()){
+                MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate, 0);
+                boolean x = accDB.deposit(temp, depositAmount);
+
+            }else if(SavingsRadioButton.isSelected()){
+                Savings temp = new Savings(prof, 0.0, tempDate);
+                boolean x = accDB.deposit(temp, depositAmount);
+
+            }else if(CheckingRadioButton.isSelected()){
+                Checking temp = new Checking(prof, 0.0, tempDate);
+                boolean x = accDB.deposit(temp, depositAmount);
+            }
+
 
         }catch (Exception e){
 
@@ -162,9 +198,30 @@ public class Controller {
     @FXML
     void withdraw(ActionEvent event) {
         try{
-            Profile profile = new Profile();
-            profile.setFname(firstNameWithdraw.getText());
-            profile.setLname(lastNameWithdraw.getText());
+            Profile prof = new Profile();
+            prof.setFname(firstNameWithdraw.getText());
+            prof.setLname(lastNameWithdraw.getText());
+            Date tempDate = new Date(1, 1, 1);
+            double withdrawalAmount = Double.parseDouble(amountWithdraw.getText());
+
+
+            if(MMRadioButton.isSelected()){
+                MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate);
+                int x = accDB.withdrawal(temp, withdrawalAmount);
+                // IF X == -1 PRINT INSUFFICIENT FUNDS, IF X==0 THEN SUCCESSFUL WITHDRAWAL, IF X==(any other number) PRINT ACCOUNT DOESN'T EXIST
+
+            }else if(SavingsRadioButton.isSelected()){
+                Savings temp = new Savings(prof, 0.0, tempDate);
+                int x = accDB.withdrawal(temp, withdrawalAmount);
+                // IF X == -1 PRINT INSUFFICIENT FUNDS, IF X==0 THEN SUCCESSFUL WITHDRAWAL, IF X==(any other number) PRINT ACCOUNT DOESN'T EXIST
+
+            }else if(CheckingRadioButton.isSelected()){
+                Checking temp = new Checking(prof, 0.0, tempDate);
+                int x = accDB.withdrawal(temp, withdrawalAmount);
+                // IF X == -1 PRINT INSUFFICIENT FUNDS, IF X==0 THEN SUCCESSFUL WITHDRAWAL, IF X==(any other number) PRINT ACCOUNT DOESN'T EXIST
+
+            }
+
         }catch (Exception e){
 
         }
