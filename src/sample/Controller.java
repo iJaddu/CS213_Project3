@@ -54,17 +54,23 @@ public class Controller {
         amountDeposit.clear();
         amountWithdraw.clear();
         outputArea.clear();
+        loyalCustomerOpen.setDisable(false);
+        directDepositOpen.setDisable(false);
+        loyalCustomerClose.setDisable(false);
+        directDepositOpen.setDisable(false);
     }
 
 
     @FXML
     void mmButtonOnClickedOpen(ActionEvent event) {
+        MMRadioButton.setSelected(true);
         loyalCustomerOpen.setDisable(true);
         directDepositOpen.setDisable(true);
     }
 
     @FXML
     void savingsButtonOnClickedOpen(ActionEvent event) {
+        SavingsRadioButton.setSelected(true);
         directDepositOpen.setDisable(true);
         loyalCustomerOpen.setDisable(false);
     }
@@ -73,22 +79,26 @@ public class Controller {
     void checkingButtonOnClickedOpen(ActionEvent event) {
         loyalCustomerOpen.setDisable(true);
         directDepositOpen.setDisable(false);
+        CheckingRadioButton.setSelected(true);
     }
 
     @FXML
     void mmButtonOnClickedClose(ActionEvent event) {
+        MMRadioButton.setSelected(true);
         loyalCustomerClose.setDisable(true);
         directDepositClose.setDisable(true);
     }
 
     @FXML
     void savingsButtonOnClickedClose(ActionEvent event) {
+        SavingsRadioButton.setSelected(true);
         directDepositClose.setDisable(true);
         loyalCustomerClose.setDisable(false);
     }
 
     @FXML
     void checkingButtonOnClickedClose(ActionEvent event) {
+        CheckingRadioButton.setSelected(true);
         loyalCustomerClose.setDisable(true);
         directDepositClose.setDisable(false);
     }
@@ -103,15 +113,15 @@ public class Controller {
             prof.setLname(lastNameClose.getText());
             Date tempDate = new Date(1, 1, 1);
 
-            if (MMRadioButton.isSelected()) {
+            if (MMRadioButton.isSelected() == true) {
                 MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate, 0);
                 boolean x = accDB.remove(temp);
 
-            } else if (SavingsRadioButton.isSelected()) {
+            } else if (SavingsRadioButton.isSelected() == true) {
                 Savings temp = new Savings(prof, 0.0, tempDate);
                 boolean x = accDB.remove(temp);
 
-            } else if (CheckingRadioButton.isSelected()) {
+            } else if (CheckingRadioButton.isSelected() == true) {
                 Checking temp = new Checking(prof, 0.0, tempDate);
                 boolean x = accDB.remove(temp);
             } else {
@@ -145,17 +155,17 @@ public class Controller {
             double amount = Double.parseDouble(balanceOpen.getText());
 
 
-            if (MMRadioButton.isSelected()) {
+            if (MMRadioButton.isSelected() == true) {
                 int withdraw = 0;
                 MoneyMarket temp = new MoneyMarket(prof, amount, tempDate, withdraw);
                 boolean x = accDB.add(temp);
 
-            } else if (SavingsRadioButton.isSelected()) {
+            } else if (SavingsRadioButton.isSelected() == true) {
                 boolean loyalty = loyalCustomerOpen.isSelected();
                 Savings temp = new Savings(prof, amount, tempDate, loyalty);
                 boolean x = accDB.add(temp);
 
-            } else if (CheckingRadioButton.isSelected()) {
+            } else if (CheckingRadioButton.isSelected() == true) {
                 boolean dDeposit = directDepositOpen.isSelected();
                 Checking temp = new Checking(prof, amount, tempDate, dDeposit);
                 boolean x = accDB.add(temp);
