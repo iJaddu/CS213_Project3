@@ -1,6 +1,6 @@
 package sample;
 
-import javax.sound.midi.Soundbank;
+
 
 /**
  AccountDatabase class is for the management of the database array of all accounts. It takes command inputs from TransactionManager to perform the given command/operation on the array.
@@ -266,10 +266,10 @@ public class AccountDatabase {
         msg = "--Printing Statement by Date Opened-- \n";
 
         for(int i = 0; i < size; i++) {
-            msg = msg + accounts[i].toString() + "\n";
-            msg = msg + "- Interest: $" + accounts[i].monthlyInterest() + "\n";
-            msg = msg + "- Fee: $" + accounts[i].monthlyFee() + "\n";
-            msg = msg + "- New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
+            msg = msg + accounts[i].toString() +"\n";
+            msg = msg + "  - Interest: $" + accounts[i].monthlyInterest() + "\n";
+            msg = msg + "  - Fee: $" + accounts[i].monthlyFee() + "\n";
+            msg = msg + "  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
         }
         msg = msg + "--End of printing--\n";
         return msg;
@@ -293,9 +293,9 @@ public class AccountDatabase {
 
         for(int i = 0; i < size; i++) {
             msg = msg + accounts[i].toString() + "\n";
-            msg =msg + "- Interest: $" + accounts[i].monthlyInterest() + "\n";
-            msg = msg + "- Fee: $" + accounts[i].monthlyFee() + "\n";
-            msg = msg + "- New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
+            msg =msg + "  - Interest: $" + accounts[i].monthlyInterest() + "\n";
+            msg = msg + "  - Fee: $" + accounts[i].monthlyFee() + "\n";
+            msg = msg + "  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
         }
         msg = msg + "--End of printing--\n";
         return msg;
@@ -313,17 +313,17 @@ public class AccountDatabase {
             msg = "Database is empty.\n";
             return msg;
         }
-        msg = msg + "--Listing Accounts in the Database--\n";
+        // msg = "--Listing Accounts in the Database--\n";
         for(int i = 0; i < size; i++) {
             if(accountType(accounts[i]) == "C"){
-                msg = msg + ((Checking)accounts[i]).toString();
+                msg = msg + ((Checking)accounts[i]).toString() + "\n";
             } else if (accountType(accounts[i]) == "S"){
-                msg = msg + ((Savings)accounts[i]).toString();
+                msg = msg + ((Savings)accounts[i]).toString() + "\n";
             }else{
-                msg = msg + ((MoneyMarket)accounts[i]).toString();
+                msg = msg + ((MoneyMarket)accounts[i]).toString() + "\n";
             }
         }
-        msg = msg + "--end of listing--\n";
+        //msg = msg + "--End of Listing--\n";
         return msg;
     }
 

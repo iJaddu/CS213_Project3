@@ -61,7 +61,7 @@ public abstract class Account {
      */
     public String toString() {
 
-        return "*" + holder.getFname() + holder.getLname() + "* $" + this.balance + "*" + dateOpen.toString() + "*";
+        return "*" + holder.getFname() + " " +  holder.getLname() + "* $" + this.balance + "*" + dateOpen.toString() + "*";
     }
 
     public abstract double monthlyInterest();

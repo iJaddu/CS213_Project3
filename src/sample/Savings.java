@@ -53,6 +53,17 @@ public class Savings extends Account {
     }
 
 
+    @Override
+    public String toString() {
+
+        if(isLoyal()) {
+            return "*Savings" + super.toString() + "Special Savings Account*";
+        }
+
+        return "*Savings" + super.toString() ;
+    }
+
+
     /**
      Getter & Setter Methods
      */

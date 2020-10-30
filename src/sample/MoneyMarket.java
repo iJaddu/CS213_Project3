@@ -46,6 +46,12 @@ public class MoneyMarket extends Account {
         return fee;
     }
 
+    @Override
+    public String toString() {
+
+        return "*Money Market" + super.toString() + getWithdrawals() + " Withdrawals";
+    }
+
 
     /**
      Getter & Setter Methods

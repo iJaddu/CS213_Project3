@@ -49,6 +49,15 @@ public class Checking extends Account {
         return fee;
     }
 
+    @Override
+    public String toString() {
+
+        if(isDirectDeposit()) {
+            return "*Checking" + super.toString() + "Direct Deposit Account*";
+        }
+
+        return "*Checking" + super.toString();
+    }
 
     /**
      Getter & Setter Methods
