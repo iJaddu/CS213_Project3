@@ -105,6 +105,39 @@ public class Controller {
         directDepositClose.setDisable(false);
     }
 
+    @FXML
+    void checkingButtonOnClickedDeposit(ActionEvent event) {
+        CheckingRadioButton.setSelected(true);
+    }
+
+    @FXML
+    void checkingButtonOnClickedWithdraw(ActionEvent event) {
+        CheckingRadioButton.setSelected(true);
+    }
+
+    @FXML
+    void mmButtonOnClickedDeposit(ActionEvent event) {
+        MMRadioButton.setSelected(true);
+    }
+
+    @FXML
+    void mmButtonOnClickedWithdraw(ActionEvent event) {
+        MMRadioButton.setSelected(true);
+    }
+
+    @FXML
+    void savingsButtonOnClickedDeposit(ActionEvent event) {
+        SavingsRadioButton.setSelected(true);
+    }
+
+
+    @FXML
+    void savingsButtonOnClickedWithdraw(ActionEvent event) {
+        SavingsRadioButton.setSelected(true);
+
+    }
+
+
 
     @FXML
     void closeAccount(ActionEvent event) {

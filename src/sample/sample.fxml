@@ -191,9 +191,9 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <RadioButton fx:id="CheckingRadioButton" mnemonicParsing="false" text="Checking" toggleGroup="$acctype" GridPane.halignment="LEFT" />
-                                    <RadioButton fx:id="SavingsRadioButton" mnemonicParsing="false" text="Savings" toggleGroup="$acctype" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                                    <RadioButton fx:id="MMRadioButton" mnemonicParsing="false" text="Money Market" toggleGroup="$acctype" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                                    <RadioButton fx:id="CheckingRadioButton" mnemonicParsing="false" onAction="#checkingButtonOnClickedDeposit" text="Checking" toggleGroup="$acctype" GridPane.halignment="LEFT" />
+                                    <RadioButton fx:id="SavingsRadioButton" mnemonicParsing="false" onAction="#savingsButtonOnClickedDeposit" text="Savings" toggleGroup="$acctype" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                    <RadioButton fx:id="MMRadioButton" mnemonicParsing="false" onAction="#mmButtonOnClickedDeposit" text="Money Market" toggleGroup="$acctype" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                                     <Button fx:id="depositButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deposit" prefHeight="26.0" prefWidth="136.0" text="Deposit" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
@@ -235,9 +235,9 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="Checking" toggleGroup="$acctype" GridPane.halignment="LEFT" />
-                                    <RadioButton mnemonicParsing="false" text="Savings" toggleGroup="$acctype" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
-                                    <RadioButton mnemonicParsing="false" text="Money Market" toggleGroup="$acctype" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                                    <RadioButton fx:id="CheckingRadioButton" mnemonicParsing="false" onAction="#checkingButtonOnClickedWithdraw" text="Checking" toggleGroup="$acctype" GridPane.halignment="LEFT" />
+                                    <RadioButton fx:id="SavingsRadioButton" mnemonicParsing="false" onAction="#savingsButtonOnClickedWithdraw" text="Savings" toggleGroup="$acctype" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                    <RadioButton fx:id="MMRadioButton" mnemonicParsing="false" onAction="#mmButtonOnClickedWithdraw" text="Money Market" toggleGroup="$acctype" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                                     <Button fx:id="withdrawButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#withdraw" prefHeight="26.0" prefWidth="136.0" text="Withdraw" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
