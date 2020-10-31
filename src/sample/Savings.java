@@ -57,10 +57,10 @@ public class Savings extends Account {
     public String toString() {
 
         if(isLoyal()) {
-            return "*Savings" + super.toString() + "Special Savings Account*";
+            return "*Savings" + super.toString() + "Special Savings Account*\n";
         }
 
-        return "*Savings" + super.toString() ;
+        return "*Savings" + super.toString() + "\n";
     }
 
 

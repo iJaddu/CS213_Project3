@@ -53,10 +53,10 @@ public class Checking extends Account {
     public String toString() {
 
         if(isDirectDeposit()) {
-            return "*Checking" + super.toString() + "Direct Deposit Account*";
+            return "*Checking" + super.toString() + "Direct Deposit Account*\n";
         }
 
-        return "*Checking" + super.toString();
+        return "*Checking" + super.toString() + "\n";
     }
 
     /**

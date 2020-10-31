@@ -18,7 +18,7 @@ public class Controller {
     private TextField firstNameOpen, lastNameOpen, balanceOpen, firstNameClose, lastNameClose, balanceClose, firstNameDeposit, firstNameWithdraw, lastNameDeposit, lastNameWithdraw, amountDeposit, amountWithdraw, monthOpen, dayOpen, yearOpen, monthClose, dayClose, yearClose;
 
     @FXML
-    private Button openAccountButton, closeAccountButton, clearButtonOpen, accountType, clearButtonClose, depositButton, withdrawButton, importButton, exportButton;
+    private Button openAccountButton, closeAccountButton, clearButtonOpen, accountType, clearButtonClose, depositButton, withdrawButton, importButton, exportButton, printAccountsButton, printAccountsByNameButton, printAccountsByDateButton;
 
     @FXML
     private RadioButton CheckingRadioButton, SavingsRadioButton, MMRadioButton;
@@ -31,6 +31,8 @@ public class Controller {
 
     @FXML
     private ToggleGroup acctype;
+
+
 
 
     @FXML
@@ -140,9 +142,7 @@ public class Controller {
     void openAccount(ActionEvent event) {
         try {
 
-            Profile prof = new Profile();
-            prof.setFname(firstNameClose.getText());
-            prof.setLname(lastNameClose.getText());
+            Profile prof = new Profile(firstNameOpen.getText(),lastNameOpen.getText() );
 
             int year = Integer.parseInt(yearOpen.getText());
             int month = Integer.parseInt(monthOpen.getText());
@@ -287,7 +287,8 @@ public class Controller {
         }
 
 
-        outputArea.appendText("File Imported.");
+        outputArea.appendText("File Imported.\n");
+        outputArea.appendText(accDB.printAccounts());
 
     }
 
@@ -312,7 +313,7 @@ public class Controller {
             lname = st.nextToken();
             balanace = Double.parseDouble(st.nextToken());
             datestr = st.nextToken();
-            accSpecific = st.nextToken(); //Direct deposit, Loyal, withdrawals
+            accSpecific = st.nextToken(); //Direct deposit, Loyal, withdrawals (type handled on obj creation)
         }
 
         Profile prof = new Profile();
@@ -358,8 +359,31 @@ public class Controller {
             year = Integer.parseInt(stDate.nextToken());
         }
 
-        Date date = new Date(year, month, day);
-        return date;
+        return new Date(year, month, day);
+    }
+
+    @FXML
+    void printAccounts(ActionEvent event) {
+
+        outputArea.appendText("Printing Accounts...\n");
+        outputArea.appendText(accDB.printAccounts());
+        outputArea.appendText("End of Database...\n");
+    }
+
+    @FXML
+    void printAccountsByName(ActionEvent event) {
+
+        outputArea.appendText("Printing Accounts By Last Name...\n");
+        outputArea.appendText(accDB.printByLastName());
+        outputArea.appendText("End of Database...\n");
+    }
+
+    @FXML
+    void printAccountsByDate(ActionEvent event) {
+
+        outputArea.appendText("Printing Accounts By the Date Opened...\n");
+        outputArea.appendText(accDB.printByDateOpen());
+        outputArea.appendText("End of Database...\n");
     }
 
 

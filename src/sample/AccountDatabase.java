@@ -263,15 +263,15 @@ public class AccountDatabase {
         }
 
         sortByDateOpen();
-        msg = "--Printing Statement by Date Opened-- \n";
+       // msg = "--Printing Statement by Date Opened-- \n";
 
         for(int i = 0; i < size; i++) {
-            msg = msg + accounts[i].toString() +"\n";
-            msg = msg + "  - Interest: $" + accounts[i].monthlyInterest() + "\n";
-            msg = msg + "  - Fee: $" + accounts[i].monthlyFee() + "\n";
-            msg = msg + "  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
+            msg = msg.concat(accounts[i].toString());
+            msg = msg.concat("  - Interest: $" + accounts[i].monthlyInterest() + "\n");
+            msg = msg.concat("  - Fee: $" + accounts[i].monthlyFee() + "\n");
+            msg = msg.concat("  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest() + "\n"));
         }
-        msg = msg + "--End of printing--\n";
+        //msg = msg + "--End of printing--\n";
         return msg;
     }
 
@@ -289,20 +289,20 @@ public class AccountDatabase {
         }
 
         sortByLastName();
-        msg = msg + "--Printing Statement by Last Name--\n";
+        //msg = msg + "--Printing Statement by Last Name--\n";
 
         for(int i = 0; i < size; i++) {
-            msg = msg + accounts[i].toString() + "\n";
-            msg =msg + "  - Interest: $" + accounts[i].monthlyInterest() + "\n";
-            msg = msg + "  - Fee: $" + accounts[i].monthlyFee() + "\n";
-            msg = msg + "  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest()) + "\n";
+            msg = msg.concat(accounts[i].toString()) ;
+            msg = msg.concat( "  - Interest: $" + accounts[i].monthlyInterest() + "\n" );
+            msg = msg.concat("  - Fee: $" + accounts[i].monthlyFee() + "\n");
+            msg = msg.concat("  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest() + "\n"));
         }
-        msg = msg + "--End of printing--\n";
+       // msg = msg + "--End of printing--\n";
         return msg;
     }
 
     /**
-    Returns a string of the accounts in Account database
+    Returns a string of all accounts in Account database
     @return msg
     */
     public String printAccounts() {
@@ -315,12 +315,12 @@ public class AccountDatabase {
         }
         // msg = "--Listing Accounts in the Database--\n";
         for(int i = 0; i < size; i++) {
-            if(accountType(accounts[i]) == "C"){
-                msg = msg + ((Checking)accounts[i]).toString() + "\n";
-            } else if (accountType(accounts[i]) == "S"){
-                msg = msg + ((Savings)accounts[i]).toString() + "\n";
+            if(accountType(accounts[i]).equals("C")){
+                msg = msg.concat(((Checking)accounts[i]).toString());
+            } else if (accountType(accounts[i]).equals("S")){
+                msg = msg.concat(((Savings)accounts[i]).toString());
             }else{
-                msg = msg + ((MoneyMarket)accounts[i]).toString() + "\n";
+                msg = msg.concat(((MoneyMarket)accounts[i]).toString());
             }
         }
         //msg = msg + "--End of Listing--\n";
