@@ -44,7 +44,7 @@ public abstract class Account {
      @param amount the amoun to be removed from the account balance
      */
     public void debit(double amount) {
-        balance = balance - amount;
+        balance = (balance - amount);
     }
 
     /**
