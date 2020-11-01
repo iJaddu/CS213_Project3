@@ -34,7 +34,10 @@ public class Controller {
 
 
 
-
+    /**
+     * Clear button hit in any tab, clears all text fields.
+     * @param event
+     */
     @FXML
     void clearTextFields(ActionEvent event) {
         firstNameOpen.clear();
@@ -63,6 +66,10 @@ public class Controller {
     }
 
 
+    /**
+     * MoneyMarket account type button clicked in the open account tab
+     * @param event
+     */
     @FXML
     void mmButtonOnClickedOpen(ActionEvent event) {
         MMRadioButton.setSelected(true);
@@ -70,6 +77,10 @@ public class Controller {
         directDepositOpen.setDisable(true);
     }
 
+    /**
+     * Savings account type button clicked in the open account tab
+     * @param event
+     */
     @FXML
     void savingsButtonOnClickedOpen(ActionEvent event) {
         SavingsRadioButton.setSelected(true);
@@ -77,6 +88,10 @@ public class Controller {
         loyalCustomerOpen.setDisable(false);
     }
 
+    /**
+     * Checking account type button clicked in the open account tab
+     * @param event
+     */
     @FXML
     void checkingButtonOnClickedOpen(ActionEvent event) {
         loyalCustomerOpen.setDisable(true);
@@ -84,6 +99,10 @@ public class Controller {
         CheckingRadioButton.setSelected(true);
     }
 
+    /**
+     * MoneyMarket account type button clicked in the close account tab
+     * @param event
+     */
     @FXML
     void mmButtonOnClickedClose(ActionEvent event) {
         MMRadioButton.setSelected(true);
@@ -91,6 +110,10 @@ public class Controller {
         directDepositClose.setDisable(true);
     }
 
+    /**
+     * Savings account type button clicked in the close account tab
+     * @param event
+     */
     @FXML
     void savingsButtonOnClickedClose(ActionEvent event) {
         SavingsRadioButton.setSelected(true);
@@ -98,6 +121,10 @@ public class Controller {
         loyalCustomerClose.setDisable(false);
     }
 
+    /**
+     * Checking account type button clicked in the close account tab
+     * @param event
+     */
     @FXML
     void checkingButtonOnClickedClose(ActionEvent event) {
         CheckingRadioButton.setSelected(true);
@@ -105,40 +132,65 @@ public class Controller {
         directDepositClose.setDisable(false);
     }
 
+    /**
+     * Checking account type button clicked in the deposit tab
+     * @param event
+     */
     @FXML
     void checkingButtonOnClickedDeposit(ActionEvent event) {
         CheckingRadioButton.setSelected(true);
     }
 
+    /**
+     * Checking account type button clicked in the withdraw tab
+     * @param event
+     */
     @FXML
     void checkingButtonOnClickedWithdraw(ActionEvent event) {
         CheckingRadioButton.setSelected(true);
     }
 
+    /**
+     * MoneyMarket account type button clicked in the deposit tab
+     * @param event
+     */
     @FXML
     void mmButtonOnClickedDeposit(ActionEvent event) {
         MMRadioButton.setSelected(true);
     }
 
+    /**
+     * MoneyMarket account type button clicked in the withdraw tab
+     * @param event
+     */
     @FXML
     void mmButtonOnClickedWithdraw(ActionEvent event) {
         MMRadioButton.setSelected(true);
     }
 
+    /**
+     * Savings account type button clicked in the deposit tab
+     * @param event
+     */
     @FXML
     void savingsButtonOnClickedDeposit(ActionEvent event) {
         SavingsRadioButton.setSelected(true);
     }
 
 
+    /**
+     * Savings account type button clicked in the withdraw tab
+     * @param event
+     */
     @FXML
     void savingsButtonOnClickedWithdraw(ActionEvent event) {
         SavingsRadioButton.setSelected(true);
-
     }
 
-
-
+    /**
+     * Close an existing Checking, Savings, or MoneyMarket account.
+     * @param event
+     */
     @FXML
     void closeAccount(ActionEvent event) {
 
@@ -171,6 +223,10 @@ public class Controller {
 
     }
 
+    /**
+     * Open a new Checking, Savings, or MoneyMarket account.
+     * @param event
+     */
     @FXML
     void openAccount(ActionEvent event) {
         try {
@@ -210,6 +266,10 @@ public class Controller {
 
     }
 
+    /**
+     * Deposit funds into an existing account
+     * @param event
+     */
     @FXML
     void deposit(ActionEvent event) {
         try {
@@ -241,6 +301,10 @@ public class Controller {
 
     }
 
+    /**
+     * Withdraw an amount from an existing account.
+     * @param event
+     */
     @FXML
     void withdraw(ActionEvent event) {
         try {
@@ -395,6 +459,10 @@ public class Controller {
         return new Date(year, month, day);
     }
 
+    /**
+     * Prints accounts in the database when the button is pressed.
+     * @param event
+     */
     @FXML
     void printAccounts(ActionEvent event) {
 
@@ -403,6 +471,10 @@ public class Controller {
         outputArea.appendText("End of Database...\n");
     }
 
+    /**
+     * Prints accounts by Name ordering when the button is pressed.
+     * @param event
+     */
     @FXML
     void printAccountsByName(ActionEvent event) {
 
@@ -411,6 +483,10 @@ public class Controller {
         outputArea.appendText("End of Database...\n");
     }
 
+    /**
+     * Prints accounts by Date ordering when the button is pressed.
+     * @param event
+     */
     @FXML
     void printAccountsByDate(ActionEvent event) {
 
