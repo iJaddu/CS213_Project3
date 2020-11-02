@@ -32,7 +32,7 @@ public class Controller {
     private TextArea outputArea;
 
     @FXML
-    private ToggleGroup acctype;
+    private ToggleGroup acctype, acctypeclose, acctypedeposit, acctypewithdraw;
 
     @FXML
     private MenuButton printOptions;
@@ -73,6 +73,42 @@ public class Controller {
         directDepositOpen.setDisable(false);
     }
 
+
+    /**
+     * Direct Deposit button clicked in Close Account tab
+     * @param event
+     */
+    @FXML
+    void dDepositClickedClose(ActionEvent event) {
+        directDepositClose.setSelected(true);
+    }
+
+    /**
+     * Direct Deposit button clicked in Open Account tab
+     * @param event
+     */
+    @FXML
+    void dDepositClickedOpen(ActionEvent event) {
+        directDepositOpen.setSelected(true);
+    }
+
+    /**
+     * LoyalCustomer button clicked in Close Account tab
+     * @param event
+     */
+    @FXML
+    void loyalCustomerClickedClose(ActionEvent event) {
+        loyalCustomerClose.setSelected(true);
+    }
+
+    /**
+     * LoyalCustomer button clicked in Open Account tab
+     * @param event
+     */
+    @FXML
+    void loyalCustomerClickedOpen(ActionEvent event) {
+        loyalCustomerOpen.setSelected(true);
+    }
 
     /**
      * MoneyMarket account type button clicked in the open account tab
