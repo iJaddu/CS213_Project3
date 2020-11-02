@@ -691,7 +691,7 @@ public class Controller {
 
         try {
             Integer.parseInt((monthClose.getText()));
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             outputArea.appendText("Please Enter A Valid Month...\n");
         }
     }
