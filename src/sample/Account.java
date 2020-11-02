@@ -1,5 +1,7 @@
 package sample;
 
+import java.text.DecimalFormat;
+
 /**
  Abstract Account class to define an Account that stores the profile (firstname,lastname), date the account was opened, and the balance currently in the account.
  Methods include debit and credit which remove and add an amount from the account and toString to print the account in a clear way indicating account type and the data within it. Getters and setters to change values in accounts.
@@ -13,6 +15,7 @@ public abstract class Account {
     private double balance;
     private Date dateOpen;
 
+    DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      Default Account Constructor: creates a new Account, containing a new holder, balance, and Date
@@ -61,7 +64,7 @@ public abstract class Account {
      */
     public String toString() {
 
-        return "*" + holder.getFname() + " " +  holder.getLname() + "* $" + this.balance + "*" + dateOpen.toString() + "*";
+        return "*" + holder.getFname() + " " +  holder.getLname() + "* $" + df.format(this.balance) + "*" + dateOpen.toString() + "*";
     }
 
     public abstract double monthlyInterest();

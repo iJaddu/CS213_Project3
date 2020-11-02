@@ -1,6 +1,7 @@
 package sample;
 
 
+import java.text.DecimalFormat;
 
 /**
  AccountDatabase class is for the management of the database array of all accounts. It takes command inputs from TransactionManager to perform the given command/operation on the array.
@@ -15,6 +16,7 @@ public class AccountDatabase {
     private Account[] accounts;
     private int size;
 
+    DecimalFormat df = new DecimalFormat("0.00");
 
     public AccountDatabase(){
         accounts = new Account[5];
@@ -267,9 +269,9 @@ public class AccountDatabase {
 
         for(int i = 0; i < size; i++) {
             msg = msg.concat(accounts[i].toString());
-            msg = msg.concat("  - Interest: $" + accounts[i].monthlyInterest() + "\n");
-            msg = msg.concat("  - Fee: $" + accounts[i].monthlyFee() + "\n");
-            msg = msg.concat("  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest() + "\n"));
+            msg = msg.concat("  - Interest: $" + df.format( accounts[i].monthlyInterest() )+ "\n");
+            msg = msg.concat("  - Fee: $" + df.format(accounts[i].monthlyFee()) + "\n");
+            msg = msg.concat("  - New Balance: $" + df.format((accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest())) + "\n");
         }
         //msg = msg + "--End of printing--\n";
         return msg;
@@ -293,9 +295,9 @@ public class AccountDatabase {
 
         for(int i = 0; i < size; i++) {
             msg = msg.concat(accounts[i].toString()) ;
-            msg = msg.concat( "  - Interest: $" + accounts[i].monthlyInterest() + "\n" );
-            msg = msg.concat("  - Fee: $" + accounts[i].monthlyFee() + "\n");
-            msg = msg.concat("  - New Balance: $" + (accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest() + "\n"));
+            msg = msg.concat( "  - Interest: $" + df.format( accounts[i].monthlyInterest() ) + "\n" );
+            msg = msg.concat("  - Fee: $" + df.format(accounts[i].monthlyFee()) + "\n");
+            msg = msg.concat("  - New Balance: $" + df.format((accounts[i].getBalance() + accounts[i].monthlyFee() + accounts[i].monthlyInterest())) + "\n");
         }
        // msg = msg + "--End of printing--\n";
         return msg;

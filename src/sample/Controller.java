@@ -3,11 +3,13 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.*;
-import java.util.PrimitiveIterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -18,7 +20,7 @@ public class Controller {
     private TextField firstNameOpen, lastNameOpen, balanceOpen, firstNameClose, lastNameClose, balanceClose, firstNameDeposit, firstNameWithdraw, lastNameDeposit, lastNameWithdraw, amountDeposit, amountWithdraw, monthOpen, dayOpen, yearOpen, monthClose, dayClose, yearClose;
 
     @FXML
-    private Button openAccountButton, closeAccountButton, clearButtonOpen, accountType, clearButtonClose, depositButton, withdrawButton, importButton, exportButton, printAccountsButton, printAccountsByNameButton, printAccountsByDateButton;
+    private Button openAccountButton, closeAccountButton, clearButtonOpen, accountType, clearButtonClose, depositButton, withdrawButton, importButton, exportButton;
 
     @FXML
     private RadioButton CheckingRadioButton, SavingsRadioButton, MMRadioButton;
@@ -31,6 +33,12 @@ public class Controller {
 
     @FXML
     private ToggleGroup acctype;
+
+    @FXML
+    private MenuButton printOptions;
+
+    @FXML
+    private MenuItem printAccountsItem, printByNameItem, printByDateItem, exportAccountsItem, exportByNameItem, exportByDateItem;
 
 
 
@@ -198,26 +206,52 @@ public class Controller {
             Profile prof = new Profile();
             prof.setFname(firstNameClose.getText());
             prof.setLname(lastNameClose.getText());
-            Date tempDate = new Date(1, 1, 1);
 
-            if (MMRadioButton.isSelected() == true) {
-                MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate, 0);
-                boolean x = accDB.remove(temp);
+            int year = Integer.parseInt(yearClose.getText());
+            int month = Integer.parseInt(monthClose.getText());
+            int day = Integer.parseInt(dayClose.getText());
+            Date tempDate = new Date(year, month, day);
 
-            } else if (SavingsRadioButton.isSelected() == true) {
-                Savings temp = new Savings(prof, 0.0, tempDate);
-                boolean x = accDB.remove(temp);
 
-            } else if (CheckingRadioButton.isSelected() == true) {
-                Checking temp = new Checking(prof, 0.0, tempDate);
-                boolean x = accDB.remove(temp);
-            } else {
-                //print error
+            if(tempDate.isValid()) {
+
+                if (MMRadioButton.isSelected()) {
+                    MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate, 0);
+                    boolean x = accDB.remove(temp);
+
+                    if (x) {
+                        outputArea.appendText("Money Marketing Account Closed...\n");
+                    } else {
+                        outputArea.appendText("Money Marketing Account Failed To Close...\n");
+                    }
+
+                } else if (SavingsRadioButton.isSelected()) {
+                    Savings temp = new Savings(prof, 0.0, tempDate);
+                    boolean x = accDB.remove(temp);
+
+                    if (x) {
+                        outputArea.appendText("Savings Account Closed...\n");
+                    } else {
+                        outputArea.appendText("Savings Account Failed To Close...\n");
+                    }
+
+                } else if (CheckingRadioButton.isSelected()) {
+                    Checking temp = new Checking(prof, 0.0, tempDate);
+                    boolean x = accDB.remove(temp);
+
+                    if (x) {
+                        outputArea.appendText("Checking Account Closed...\n");
+                    } else {
+                        outputArea.appendText("Checking Account Failed To Close...\n");
+                    }
+                } else {
+                    outputArea.appendText("Please Pick Your Account Type...\n");
+                }
             }
-
 
         } catch (Exception e) {
 
+            outputArea.appendText("Account Not Found...\nPlease Check Your Account Information...\n");
         }
 
 
@@ -233,35 +267,52 @@ public class Controller {
 
             Profile prof = new Profile(firstNameOpen.getText(),lastNameOpen.getText() );
 
+
             int year = Integer.parseInt(yearOpen.getText());
             int month = Integer.parseInt(monthOpen.getText());
             int day = Integer.parseInt(dayOpen.getText());
-            Date tempDate = new Date(year, month, day);
-
-            boolean a = tempDate.isValid();
-            // PRINT ERROR IF NOT
-
-            double amount = Double.parseDouble(balanceOpen.getText());
 
 
-            if (MMRadioButton.isSelected() == true) {
-                int withdraw = 0;
-                MoneyMarket temp = new MoneyMarket(prof, amount, tempDate, withdraw);
-                boolean x = accDB.add(temp);
 
-            } else if (SavingsRadioButton.isSelected() == true) {
-                boolean loyalty = loyalCustomerOpen.isSelected();
-                Savings temp = new Savings(prof, amount, tempDate, loyalty);
-                boolean x = accDB.add(temp);
+            Date tempDate = new Date(year,month,day);
 
-            } else if (CheckingRadioButton.isSelected() == true) {
-                boolean dDeposit = directDepositOpen.isSelected();
-                Checking temp = new Checking(prof, amount, tempDate, dDeposit);
-                boolean x = accDB.add(temp);
+
+            if(tempDate.isValid()) {
+
+
+                double amount = Double.parseDouble(balanceOpen.getText());
+
+
+                if (MMRadioButton.isSelected()) {
+                    int withdraw = 0;
+                    MoneyMarket temp = new MoneyMarket(prof, amount, tempDate, withdraw);
+                    outputArea.appendText("Money Marketing Account Opened Successfully...\n");
+                    boolean x = accDB.add(temp);
+
+                } else if (SavingsRadioButton.isSelected()) {
+                    boolean loyalty = loyalCustomerOpen.isSelected();
+                    Savings temp = new Savings(prof, amount, tempDate, loyalty);
+                    outputArea.appendText("Savings Account Opened Successfully...\n");
+                    boolean x = accDB.add(temp);
+
+                } else if (CheckingRadioButton.isSelected()) {
+                    boolean dDeposit = directDepositOpen.isSelected();
+                    Checking temp = new Checking(prof, amount, tempDate, dDeposit);
+                    outputArea.appendText("Checking Account Opened Successfully...\n");
+                    boolean x = accDB.add(temp);
+                }
+                else {
+                    outputArea.appendText("Please Enter Your Account Type...\n");
+                }
+
+            }
+            else {
+                outputArea.appendText("Please Enter A Valid Date...\n");
             }
 
         } catch (Exception e) {
 
+            outputArea.appendText("Please Enter Your Account Information To Open An Account...\n");
         }
 
     }
@@ -286,10 +337,7 @@ public class Controller {
                 boolean x = accDB.deposit(temp, depositAmount);
 
                 if(x) {
-                    outputArea.appendText("Deposit Successful...");
-                }
-                else{
-                    outputArea.appendText("Deposit Failed...");
+                    outputArea.appendText("Deposit Successful...\n");
                 }
 
             } else if (SavingsRadioButton.isSelected()) {
@@ -297,10 +345,7 @@ public class Controller {
                 boolean x = accDB.deposit(temp, depositAmount);
 
                 if(x) {
-                    outputArea.appendText("Deposit Successful...");
-                }
-                else{
-                    outputArea.appendText("Deposit Failed...");
+                    outputArea.appendText("Deposit Successful...\n");
                 }
 
             } else if (CheckingRadioButton.isSelected()) {
@@ -308,16 +353,14 @@ public class Controller {
                 boolean x = accDB.deposit(temp, depositAmount);
 
                 if(x) {
-                    outputArea.appendText("Deposit Successful...");
-                }
-                else{
-                    outputArea.appendText("Deposit Failed...");
+                    outputArea.appendText("Deposit Successful...\n");
                 }
             }
 
 
         } catch (Exception e) {
 
+            outputArea.appendText("Account Not Found...\nPlease Check Your Account Information...\n");
         }
 
     }
@@ -347,8 +390,7 @@ public class Controller {
                     outputArea.appendText("Withdrawal Successful...");
                 }
                 else {
-                    outputArea.appendText("Account Does Not Exist...");
-                }
+                    outputArea.appendText("Account Not Found...\nPlease Check Your Account Information...\n");                }
 
             } else if (SavingsRadioButton.isSelected()) {
                 Savings temp = new Savings(prof, 0.0, tempDate);
@@ -361,8 +403,7 @@ public class Controller {
                     outputArea.appendText("Withdrawal Successful...");
                 }
                 else {
-                    outputArea.appendText("Account Does Not Exist...");
-                }
+                    outputArea.appendText("Account Not Found...\nPlease Check Your Account Information...\n");                }
 
             } else if (CheckingRadioButton.isSelected()) {
                 Checking temp = new Checking(prof, 0.0, tempDate);
@@ -375,13 +416,13 @@ public class Controller {
                     outputArea.appendText("Withdrawal Successful...");
                 }
                 else {
-                    outputArea.appendText("Account Does Not Exist...");
-                }
+                    outputArea.appendText("Account Not Found...\nPlease Check Your Account Information...\n");                }
 
             }
 
         } catch (Exception e) {
 
+            outputArea.appendText("Account Not Found...\nPlease Check Your Account Information...\n");
         }
 
     }
@@ -391,7 +432,7 @@ public class Controller {
      * @param event
      */
     @FXML
-    void exportFile(ActionEvent event) throws IOException {
+    void exportAccounts(ActionEvent event) throws IOException {
 
         FileChooser fc = new FileChooser();
         fc.setTitle("Open Target File for Export");
@@ -400,12 +441,72 @@ public class Controller {
         Stage stage = new Stage();
         File targetFile = fc.showSaveDialog(stage);
 
-        FileOutputStream fos = new FileOutputStream(targetFile);
-        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
-        dos.flush();
-        dos.writeUTF(accDB.printAccounts());
-        dos.close();
-        outputArea.appendText("File Exported...");
+        try {
+
+            PrintWriter pw = new PrintWriter(targetFile);
+            pw.println(accDB.printAccounts());
+            pw.flush();
+            pw.close();
+            outputArea.appendText("File Exported to " + targetFile.getAbsolutePath() + "...\n");
+
+        } catch (FileNotFoundException e) {
+          //  e.printStackTrace();
+            outputArea.appendText("File Not Found...\n");
+        }
+    }
+
+    @FXML
+    void exportByName(ActionEvent event) throws IOException {
+
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open Target File for Export");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        Stage stage = new Stage();
+        File targetFile = fc.showSaveDialog(stage);
+
+        try {
+
+            PrintWriter pw = new PrintWriter(targetFile);
+            pw.println(accDB.printByLastName());
+            pw.flush();
+            pw.close();
+            outputArea.appendText("File Exported to " + targetFile.getAbsolutePath() + "...\n");
+
+        } catch (FileNotFoundException e) {
+          //  e.printStackTrace();
+            outputArea.appendText("File Not Found...\n");
+        }
+    }
+
+    @FXML
+    void exportByDate(ActionEvent event) throws IOException {
+
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open Target File for Export");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        Stage stage = new Stage();
+
+
+
+        File targetFile = fc.showSaveDialog(stage);
+
+
+        try {
+
+            PrintWriter pw = new PrintWriter(targetFile);
+            pw.println(accDB.printByDateOpen());
+            pw.flush();
+            pw.close();
+            outputArea.appendText("File Exported to " + targetFile.getAbsolutePath() + "...\n");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            outputArea.appendText("File Not Found...\n");
+        }
+
+
     }
 
 
@@ -426,16 +527,22 @@ public class Controller {
         Stage stage = new Stage();
         File sourceFile = fc.showOpenDialog(stage);
 
-        Scanner scan = new Scanner(sourceFile);
+        try {
+            Scanner scan = new Scanner(sourceFile);
 
-        while (scan.hasNextLine()) {
+            while (scan.hasNextLine()) {
 
-            accDB.add(createAccount(scan.nextLine()));  //Each line from file is an account
+                accDB.add(createAccount(scan.nextLine()));  //Each line from file is an account
+            }
+
+
+            outputArea.appendText("File Imported.\n");
+            //outputArea.appendText(accDB.printAccounts());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            outputArea.appendText("File Not Found...\n");
         }
 
-
-        outputArea.appendText("File Imported.\n");
-        outputArea.appendText(accDB.printAccounts());
 
     }
 
@@ -545,5 +652,70 @@ public class Controller {
         outputArea.appendText("End of Database...\n");
     }
 
+    @FXML
+    void checkMonth(MouseEvent event) {
+
+        try {
+            int month = Integer.parseInt(monthOpen.getText());
+        } catch (Exception e) {
+            outputArea.appendText("Please Enter A Valid Month...\n");
+        }
+    }
+
+
+    @FXML
+    void checkYear(MouseEvent event) {
+
+        try {
+            int year = Integer.parseInt(yearOpen.getText());
+        } catch (Exception e) {
+            outputArea.appendText("Please Enter A Valid Year...\n");
+        }
+    }
+
+
+    @FXML
+    void checkDay(MouseEvent event) {
+
+        try {
+            int day = Integer.parseInt(dayOpen.getText());
+        } catch (Exception e) {
+            outputArea.appendText("Please Enter A Valid Day...\n");
+        }
+    }
+
+
+
+    @FXML
+    void checkMonthClose(KeyEvent event) {
+
+        try {
+            Integer.parseInt((monthClose.getText()));
+        } catch (IllegalArgumentException e) {
+            outputArea.appendText("Please Enter A Valid Month...\n");
+        }
+    }
+
+
+    @FXML
+    void checkYearClose(KeyEvent event) {
+
+        try {
+            int year = Integer.parseInt(yearClose.getText());
+        } catch (Exception e) {
+            outputArea.appendText("Please Enter A Valid Year...\n");
+        }
+    }
+
+
+    @FXML
+    void checkDayClose(KeyEvent event) {
+
+        try {
+            int day = Integer.parseInt(dayClose.getText());
+        } catch (Exception e) {
+            outputArea.appendText("Please Enter A Valid Day...\n");
+        }
+    }
 
 }
