@@ -285,13 +285,34 @@ public class Controller {
                 MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate, 0);
                 boolean x = accDB.deposit(temp, depositAmount);
 
+                if(x) {
+                    outputArea.appendText("Deposit Successful...");
+                }
+                else{
+                    outputArea.appendText("Deposit Failed...");
+                }
+
             } else if (SavingsRadioButton.isSelected()) {
                 Savings temp = new Savings(prof, 0.0, tempDate);
                 boolean x = accDB.deposit(temp, depositAmount);
 
+                if(x) {
+                    outputArea.appendText("Deposit Successful...");
+                }
+                else{
+                    outputArea.appendText("Deposit Failed...");
+                }
+
             } else if (CheckingRadioButton.isSelected()) {
                 Checking temp = new Checking(prof, 0.0, tempDate);
                 boolean x = accDB.deposit(temp, depositAmount);
+
+                if(x) {
+                    outputArea.appendText("Deposit Successful...");
+                }
+                else{
+                    outputArea.appendText("Deposit Failed...");
+                }
             }
 
 
@@ -319,16 +340,43 @@ public class Controller {
                 MoneyMarket temp = new MoneyMarket(prof, 0.0, tempDate);
                 int x = accDB.withdrawal(temp, withdrawalAmount);
                 // IF X == -1 PRINT INSUFFICIENT FUNDS, IF X==0 THEN SUCCESSFUL WITHDRAWAL, IF X==(any other number) PRINT ACCOUNT DOESN'T EXIST
+                if(x == -1) {
+                    outputArea.appendText("Insufficient Funds...\n");
+                }
+                else if(x == 0) {
+                    outputArea.appendText("Withdrawal Successful...");
+                }
+                else {
+                    outputArea.appendText("Account Does Not Exist...");
+                }
 
             } else if (SavingsRadioButton.isSelected()) {
                 Savings temp = new Savings(prof, 0.0, tempDate);
                 int x = accDB.withdrawal(temp, withdrawalAmount);
                 // IF X == -1 PRINT INSUFFICIENT FUNDS, IF X==0 THEN SUCCESSFUL WITHDRAWAL, IF X==(any other number) PRINT ACCOUNT DOESN'T EXIST
+                if(x == -1) {
+                    outputArea.appendText("Insufficient Funds...\n");
+                }
+                else if(x == 0) {
+                    outputArea.appendText("Withdrawal Successful...");
+                }
+                else {
+                    outputArea.appendText("Account Does Not Exist...");
+                }
 
             } else if (CheckingRadioButton.isSelected()) {
                 Checking temp = new Checking(prof, 0.0, tempDate);
                 int x = accDB.withdrawal(temp, withdrawalAmount);
                 // IF X == -1 PRINT INSUFFICIENT FUNDS, IF X==0 THEN SUCCESSFUL WITHDRAWAL, IF X==(any other number) PRINT ACCOUNT DOESN'T EXIST
+                if(x == -1) {
+                    outputArea.appendText("Insufficient Funds...\n");
+                }
+                else if(x == 0) {
+                    outputArea.appendText("Withdrawal Successful...");
+                }
+                else {
+                    outputArea.appendText("Account Does Not Exist...");
+                }
 
             }
 
@@ -354,8 +402,10 @@ public class Controller {
 
         FileOutputStream fos = new FileOutputStream(targetFile);
         DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(fos));
+        dos.flush();
         dos.writeUTF(accDB.printAccounts());
         dos.close();
+        outputArea.appendText("File Exported...");
     }
 
 
