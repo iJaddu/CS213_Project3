@@ -13,6 +13,13 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+
+/**
+ * Controller Class for the GUI applications
+ * Handles all actions of the GUI
+ * @author Tanuj Desai, Nicholas Makar
+ */
+
 public class Controller {
     AccountDatabase accDB = new AccountDatabase();
 
@@ -563,6 +570,8 @@ public class Controller {
         Stage stage = new Stage();
         File sourceFile = fc.showOpenDialog(stage);
 
+
+
         try {
             Scanner scan = new Scanner(sourceFile);
 
@@ -689,10 +698,10 @@ public class Controller {
     }
 
     @FXML
-    void checkMonth(MouseEvent event) {
+    void checkMonth(KeyEvent event) {
 
         try {
-            int month = Integer.parseInt(monthOpen.getText());
+            Integer.parseInt((monthOpen.getText()));
         } catch (Exception e) {
             outputArea.appendText("Please Enter A Valid Month...\n");
         }
@@ -700,10 +709,10 @@ public class Controller {
 
 
     @FXML
-    void checkYear(MouseEvent event) {
+    void checkYear(KeyEvent event) {
 
         try {
-            int year = Integer.parseInt(yearOpen.getText());
+            int year = Integer.parseInt((yearOpen.getText()));
         } catch (Exception e) {
             outputArea.appendText("Please Enter A Valid Year...\n");
         }
@@ -711,14 +720,15 @@ public class Controller {
 
 
     @FXML
-    void checkDay(MouseEvent event) {
+    void checkDay(KeyEvent event) {
 
         try {
-            int day = Integer.parseInt(dayOpen.getText());
+            int day = Integer.parseInt((dayOpen.getText()));
         } catch (Exception e) {
             outputArea.appendText("Please Enter A Valid Day...\n");
         }
     }
+
 
 
 
@@ -737,7 +747,7 @@ public class Controller {
     void checkYearClose(KeyEvent event) {
 
         try {
-            int year = Integer.parseInt(yearClose.getText());
+            int year = Integer.parseInt((yearClose.getText()));
         } catch (Exception e) {
             outputArea.appendText("Please Enter A Valid Year...\n");
         }
@@ -748,7 +758,7 @@ public class Controller {
     void checkDayClose(KeyEvent event) {
 
         try {
-            int day = Integer.parseInt(dayClose.getText());
+            int day = Integer.parseInt((dayClose.getText()));
         } catch (Exception e) {
             outputArea.appendText("Please Enter A Valid Day...\n");
         }

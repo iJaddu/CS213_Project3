@@ -58,9 +58,9 @@
                                           <TextField fx:id="balanceOpen" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
-                                                <TextField fx:id="monthOpen" onMouseExited="#checkMonth" prefHeight="25.0" prefWidth="44.0" promptText="mm" />
-                                                <TextField fx:id="dayOpen" layoutX="10.0" layoutY="10.0" onMouseExited="#checkDay" prefHeight="25.0" prefWidth="45.0" promptText="dd" />
-                                                <TextField fx:id="yearOpen" layoutX="48.0" layoutY="10.0" onMouseExited="#checkYear" prefHeight="25.0" prefWidth="47.0" promptText="yyyy" />
+                                                <TextField fx:id="monthOpen" onKeyReleased="#checkMonth" prefHeight="25.0" prefWidth="44.0" promptText="mm" />
+                                                <TextField fx:id="dayOpen" layoutX="10.0" layoutY="10.0" onKeyReleased="#checkDay" prefHeight="25.0" prefWidth="45.0" promptText="dd" />
+                                                <TextField fx:id="yearOpen" layoutX="48.0" layoutY="10.0" onKeyReleased="#checkYear" prefHeight="25.0" prefWidth="47.0" promptText="yyyy" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -124,8 +124,8 @@
                                           <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
                                                 <TextField fx:id="monthClose" onKeyReleased="#checkMonthClose" prefHeight="25.0" prefWidth="44.0" promptText="mm" />
-                                                <TextField fx:id="dayClose" layoutX="10.0" layoutY="10.0" onKeyPressed="#checkDayClose" prefHeight="25.0" prefWidth="45.0" promptText="dd" />
-                                                <TextField fx:id="yearClose" layoutX="48.0" layoutY="10.0" onKeyPressed="#checkYearClose" prefHeight="25.0" prefWidth="47.0" promptText="yyyy" />
+                                                <TextField fx:id="dayClose" layoutX="10.0" layoutY="10.0" onKeyReleased="#checkDayClose" prefHeight="25.0" prefWidth="45.0" promptText="dd" />
+                                                <TextField fx:id="yearClose" layoutX="48.0" layoutY="10.0" onKeyReleased="#checkYearClose" prefHeight="25.0" prefWidth="47.0" promptText="yyyy" />
                                              </children>
                                           </HBox>
                                        </children>
